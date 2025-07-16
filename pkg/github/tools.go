@@ -47,19 +47,6 @@ func DefaultToolsetGroup(readOnly bool, getClient GetClientFn, getGQLClient GetG
 			toolsets.NewServerResourceTemplate(GetRepositoryResourceTagContent(getClient, getRawClient, t)),
 			toolsets.NewServerResourceTemplate(GetRepositoryResourcePrContent(getClient, getRawClient, t)),
 		)
-	issues := toolsets.NewToolset("issues", "GitHub Issues related tools").
-		AddReadTools(
-			toolsets.NewServerTool(GetIssue(getClient, t)),
-			toolsets.NewServerTool(SearchIssues(getClient, t)),
-			toolsets.NewServerTool(ListIssues(getClient, t)),
-			toolsets.NewServerTool(GetIssueComments(getClient, t)),
-		).
-		AddWriteTools(
-			toolsets.NewServerTool(CreateIssue(getClient, t)),
-			toolsets.NewServerTool(AddIssueComment(getClient, t)),
-			toolsets.NewServerTool(UpdateIssue(getClient, t)),
-			toolsets.NewServerTool(AssignCopilotToIssue(getGQLClient, t)),
-		).AddPrompts(toolsets.NewServerPrompt(AssignCodingAgentPrompt(t)))
 	users := toolsets.NewToolset("users", "GitHub User related tools").
 		AddReadTools(
 			toolsets.NewServerTool(SearchUsers(getClient, t)),
@@ -93,41 +80,6 @@ func DefaultToolsetGroup(readOnly bool, getClient GetClientFn, getGQLClient GetG
 			toolsets.NewServerTool(SubmitPendingPullRequestReview(getGQLClient, t)),
 			toolsets.NewServerTool(DeletePendingPullRequestReview(getGQLClient, t)),
 		)
-	codeSecurity := toolsets.NewToolset("code_security", "Code security related tools, such as GitHub Code Scanning").
-		AddReadTools(
-			toolsets.NewServerTool(GetCodeScanningAlert(getClient, t)),
-			toolsets.NewServerTool(ListCodeScanningAlerts(getClient, t)),
-		)
-	secretProtection := toolsets.NewToolset("secret_protection", "Secret protection related tools, such as GitHub Secret Scanning").
-		AddReadTools(
-			toolsets.NewServerTool(GetSecretScanningAlert(getClient, t)),
-			toolsets.NewServerTool(ListSecretScanningAlerts(getClient, t)),
-		)
-	dependabot := toolsets.NewToolset("dependabot", "Dependabot tools").
-		AddReadTools(
-			toolsets.NewServerTool(GetDependabotAlert(getClient, t)),
-			toolsets.NewServerTool(ListDependabotAlerts(getClient, t)),
-		)
-
-	notifications := toolsets.NewToolset("notifications", "GitHub Notifications related tools").
-		AddReadTools(
-			toolsets.NewServerTool(ListNotifications(getClient, t)),
-			toolsets.NewServerTool(GetNotificationDetails(getClient, t)),
-		).
-		AddWriteTools(
-			toolsets.NewServerTool(DismissNotification(getClient, t)),
-			toolsets.NewServerTool(MarkAllNotificationsRead(getClient, t)),
-			toolsets.NewServerTool(ManageNotificationSubscription(getClient, t)),
-			toolsets.NewServerTool(ManageRepositoryNotificationSubscription(getClient, t)),
-		)
-
-	discussions := toolsets.NewToolset("discussions", "GitHub Discussions related tools").
-		AddReadTools(
-			toolsets.NewServerTool(ListDiscussions(getGQLClient, t)),
-			toolsets.NewServerTool(GetDiscussion(getGQLClient, t)),
-			toolsets.NewServerTool(GetDiscussionComments(getGQLClient, t)),
-			toolsets.NewServerTool(ListDiscussionCategories(getGQLClient, t)),
-		)
 
 	actions := toolsets.NewToolset("actions", "GitHub Actions workflows and CI/CD operations").
 		AddReadTools(
@@ -160,17 +112,11 @@ func DefaultToolsetGroup(readOnly bool, getClient GetClientFn, getGQLClient GetG
 	// Add toolsets to the group
 	tsg.AddToolset(contextTools)
 	tsg.AddToolset(repos)
-	tsg.AddToolset(issues)
 	tsg.AddToolset(orgs)
 	tsg.AddToolset(users)
 	tsg.AddToolset(pullRequests)
 	tsg.AddToolset(actions)
-	tsg.AddToolset(codeSecurity)
-	tsg.AddToolset(secretProtection)
-	tsg.AddToolset(dependabot)
-	tsg.AddToolset(notifications)
 	tsg.AddToolset(experiments)
-	tsg.AddToolset(discussions)
 
 	return tsg
 }
