@@ -34,7 +34,7 @@ The `--stdio-server-cmd` flag is required for all commands and specifies the com
 List available tools in Github's MCP server:
 
 ```console
-% ./mcpcurl --stdio-server-cmd "docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN mcp/github" tools --help
+% ./mcpcurl --stdio-server-cmd "docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server" tools --help
 Contains all dynamically generated tool commands from the schema
 
 Usage:
@@ -73,7 +73,7 @@ Use "mcpcurl tools [command] --help" for more information about a command.
 Get help for a specific tool:
 
 ```console
- % ./mcpcurl --stdio-server-cmd "docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN mcp/github" tools get_issue --help
+ % ./mcpcurl --stdio-server-cmd "docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server" tools get_issue --help
 Get details of a specific issue in a GitHub repository
 
 Usage:
@@ -81,8 +81,8 @@ Usage:
 
 Flags:
   -h, --help                 help for get_issue
-      --issue_number float   
-      --owner string         
+      --issue_number float
+      --owner string
       --repo string
 
 Global Flags:
@@ -94,7 +94,7 @@ Global Flags:
 Use one of the tools:
 
 ```console
- % ./mcpcurl --stdio-server-cmd "docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN mcp/github" tools get_issue --owner golang --repo go --issue_number 1
+ % ./mcpcurl --stdio-server-cmd "docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server" tools get_issue --owner golang --repo go --issue_number 1
 {
   "active_lock_reason": null,
   "assignee": null,

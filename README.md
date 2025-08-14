@@ -268,16 +268,10 @@ The following sets of tools are available (all are on by default):
 | ----------------------- | ------------------------------------------------------------- |
 | `context`               | **Strongly recommended**: Tools that provide context about the current user and GitHub context you are operating in |
 | `actions` | GitHub Actions workflows and CI/CD operations |
-| `code_security` | Code security related tools, such as GitHub Code Scanning |
-| `dependabot` | Dependabot tools |
-| `discussions` | GitHub Discussions related tools |
 | `experiments` | Experimental features that are not considered stable yet |
-| `issues` | GitHub Issues related tools |
-| `notifications` | GitHub Notifications related tools |
 | `orgs` | GitHub Organization related tools |
 | `pull_requests` | GitHub Pull Request related tools |
 | `repos` | GitHub Repository related tools |
-| `secret_protection` | Secret protection related tools, such as GitHub Secret Scanning |
 | `users` | GitHub User related tools |
 <!-- END AUTOMATED TOOLSETS -->
 
@@ -528,180 +522,10 @@ export GITHUB_MCP_TOOL_ADD_ISSUE_COMMENT_DESCRIPTION="an alternative description
 
 <details>
 
-<summary>Code Security</summary>
-
-- **get_code_scanning_alert** - Get code scanning alert
-  - `alertNumber`: The number of the alert. (number, required)
-  - `owner`: The owner of the repository. (string, required)
-  - `repo`: The name of the repository. (string, required)
-
-- **list_code_scanning_alerts** - List code scanning alerts
-  - `owner`: The owner of the repository. (string, required)
-  - `ref`: The Git reference for the results you want to list. (string, optional)
-  - `repo`: The name of the repository. (string, required)
-  - `severity`: Filter code scanning alerts by severity (string, optional)
-  - `state`: Filter code scanning alerts by state. Defaults to open (string, optional)
-  - `tool_name`: The name of the tool used for code scanning. (string, optional)
-
-</details>
-
-<details>
-
 <summary>Context</summary>
 
 - **get_me** - Get my user profile
   - No parameters required
-
-</details>
-
-<details>
-
-<summary>Dependabot</summary>
-
-- **get_dependabot_alert** - Get dependabot alert
-  - `alertNumber`: The number of the alert. (number, required)
-  - `owner`: The owner of the repository. (string, required)
-  - `repo`: The name of the repository. (string, required)
-
-- **list_dependabot_alerts** - List dependabot alerts
-  - `owner`: The owner of the repository. (string, required)
-  - `repo`: The name of the repository. (string, required)
-  - `severity`: Filter dependabot alerts by severity (string, optional)
-  - `state`: Filter dependabot alerts by state. Defaults to open (string, optional)
-
-</details>
-
-<details>
-
-<summary>Discussions</summary>
-
-- **get_discussion** - Get discussion
-  - `discussionNumber`: Discussion Number (number, required)
-  - `owner`: Repository owner (string, required)
-  - `repo`: Repository name (string, required)
-
-- **get_discussion_comments** - Get discussion comments
-  - `discussionNumber`: Discussion Number (number, required)
-  - `owner`: Repository owner (string, required)
-  - `repo`: Repository name (string, required)
-
-- **list_discussion_categories** - List discussion categories
-  - `after`: Cursor for pagination, use the 'after' field from the previous response (string, optional)
-  - `before`: Cursor for pagination, use the 'before' field from the previous response (string, optional)
-  - `first`: Number of categories to return per page (min 1, max 100) (number, optional)
-  - `last`: Number of categories to return from the end (min 1, max 100) (number, optional)
-  - `owner`: Repository owner (string, required)
-  - `repo`: Repository name (string, required)
-
-- **list_discussions** - List discussions
-  - `category`: Optional filter by discussion category ID. If provided, only discussions with this category are listed. (string, optional)
-  - `owner`: Repository owner (string, required)
-  - `repo`: Repository name (string, required)
-
-</details>
-
-<details>
-
-<summary>Issues</summary>
-
-- **add_issue_comment** - Add comment to issue
-  - `body`: Comment content (string, required)
-  - `issue_number`: Issue number to comment on (number, required)
-  - `owner`: Repository owner (string, required)
-  - `repo`: Repository name (string, required)
-
-- **assign_copilot_to_issue** - Assign Copilot to issue
-  - `issueNumber`: Issue number (number, required)
-  - `owner`: Repository owner (string, required)
-  - `repo`: Repository name (string, required)
-
-- **create_issue** - Open new issue
-  - `assignees`: Usernames to assign to this issue (string[], optional)
-  - `body`: Issue body content (string, optional)
-  - `labels`: Labels to apply to this issue (string[], optional)
-  - `milestone`: Milestone number (number, optional)
-  - `owner`: Repository owner (string, required)
-  - `repo`: Repository name (string, required)
-  - `title`: Issue title (string, required)
-
-- **get_issue** - Get issue details
-  - `issue_number`: The number of the issue (number, required)
-  - `owner`: The owner of the repository (string, required)
-  - `repo`: The name of the repository (string, required)
-
-- **get_issue_comments** - Get issue comments
-  - `issue_number`: Issue number (number, required)
-  - `owner`: Repository owner (string, required)
-  - `page`: Page number for pagination (min 1) (number, optional)
-  - `perPage`: Results per page for pagination (min 1, max 100) (number, optional)
-  - `repo`: Repository name (string, required)
-
-- **list_issues** - List issues
-  - `direction`: Sort direction (string, optional)
-  - `labels`: Filter by labels (string[], optional)
-  - `owner`: Repository owner (string, required)
-  - `page`: Page number for pagination (min 1) (number, optional)
-  - `perPage`: Results per page for pagination (min 1, max 100) (number, optional)
-  - `repo`: Repository name (string, required)
-  - `since`: Filter by date (ISO 8601 timestamp) (string, optional)
-  - `sort`: Sort order (string, optional)
-  - `state`: Filter by state (string, optional)
-
-- **search_issues** - Search issues
-  - `order`: Sort order (string, optional)
-  - `owner`: Optional repository owner. If provided with repo, only notifications for this repository are listed. (string, optional)
-  - `page`: Page number for pagination (min 1) (number, optional)
-  - `perPage`: Results per page for pagination (min 1, max 100) (number, optional)
-  - `query`: Search query using GitHub issues search syntax (string, required)
-  - `repo`: Optional repository name. If provided with owner, only notifications for this repository are listed. (string, optional)
-  - `sort`: Sort field by number of matches of categories, defaults to best match (string, optional)
-
-- **update_issue** - Edit issue
-  - `assignees`: New assignees (string[], optional)
-  - `body`: New description (string, optional)
-  - `issue_number`: Issue number to update (number, required)
-  - `labels`: New labels (string[], optional)
-  - `milestone`: New milestone number (number, optional)
-  - `owner`: Repository owner (string, required)
-  - `repo`: Repository name (string, required)
-  - `state`: New state (string, optional)
-  - `title`: New title (string, optional)
-
-</details>
-
-<details>
-
-<summary>Notifications</summary>
-
-- **dismiss_notification** - Dismiss notification
-  - `state`: The new state of the notification (read/done) (string, optional)
-  - `threadID`: The ID of the notification thread (string, required)
-
-- **get_notification_details** - Get notification details
-  - `notificationID`: The ID of the notification (string, required)
-
-- **list_notifications** - List notifications
-  - `before`: Only show notifications updated before the given time (ISO 8601 format) (string, optional)
-  - `filter`: Filter notifications to, use default unless specified. Read notifications are ones that have already been acknowledged by the user. Participating notifications are those that the user is directly involved in, such as issues or pull requests they have commented on or created. (string, optional)
-  - `owner`: Optional repository owner. If provided with repo, only notifications for this repository are listed. (string, optional)
-  - `page`: Page number for pagination (min 1) (number, optional)
-  - `perPage`: Results per page for pagination (min 1, max 100) (number, optional)
-  - `repo`: Optional repository name. If provided with owner, only notifications for this repository are listed. (string, optional)
-  - `since`: Only show notifications updated after the given time (ISO 8601 format) (string, optional)
-
-- **manage_notification_subscription** - Manage notification subscription
-  - `action`: Action to perform: ignore, watch, or delete the notification subscription. (string, required)
-  - `notificationID`: The ID of the notification thread. (string, required)
-
-- **manage_repository_notification_subscription** - Manage repository notification subscription
-  - `action`: Action to perform: ignore, watch, or delete the repository notification subscription. (string, required)
-  - `owner`: The account owner of the repository. (string, required)
-  - `repo`: The name of the repository. (string, required)
-
-- **mark_all_notifications_read** - Mark all notifications as read
-  - `lastReadAt`: Describes the last point that notifications were checked (optional). Default: Now (string, optional)
-  - `owner`: Optional repository owner. If provided with repo, only notifications for this repository are marked as read. (string, optional)
-  - `repo`: Optional repository name. If provided with owner, only notifications for this repository are marked as read. (string, optional)
 
 </details>
 
@@ -810,11 +634,6 @@ export GITHUB_MCP_TOOL_ADD_ISSUE_COMMENT_DESCRIPTION="an alternative description
   - `commit_message`: Extra detail for merge commit (string, optional)
   - `commit_title`: Title for merge commit (string, optional)
   - `merge_method`: Merge method (string, optional)
-  - `owner`: Repository owner (string, required)
-  - `pullNumber`: Pull request number (number, required)
-  - `repo`: Repository name (string, required)
-
-- **request_copilot_review** - Request Copilot review
   - `owner`: Repository owner (string, required)
   - `pullNumber`: Pull request number (number, required)
   - `repo`: Repository name (string, required)
@@ -947,24 +766,6 @@ export GITHUB_MCP_TOOL_ADD_ISSUE_COMMENT_DESCRIPTION="an alternative description
   - `page`: Page number for pagination (min 1) (number, optional)
   - `perPage`: Results per page for pagination (min 1, max 100) (number, optional)
   - `query`: Search query (string, required)
-
-</details>
-
-<details>
-
-<summary>Secret Protection</summary>
-
-- **get_secret_scanning_alert** - Get secret scanning alert
-  - `alertNumber`: The number of the alert. (number, required)
-  - `owner`: The owner of the repository. (string, required)
-  - `repo`: The name of the repository. (string, required)
-
-- **list_secret_scanning_alerts** - List secret scanning alerts
-  - `owner`: The owner of the repository. (string, required)
-  - `repo`: The name of the repository. (string, required)
-  - `resolution`: Filter by resolution (string, optional)
-  - `secret_type`: A comma-separated list of secret types to return. All default secret patterns are returned. To return generic patterns, pass the token name(s) in the parameter. (string, optional)
-  - `state`: Filter by state (string, optional)
 
 </details>
 
