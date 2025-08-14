@@ -71,7 +71,6 @@ func DefaultToolsetGroup(readOnly bool, getClient GetClientFn, getGQLClient GetG
 			toolsets.NewServerTool(UpdatePullRequestBranch(getClient, t)),
 			toolsets.NewServerTool(CreatePullRequest(getClient, t)),
 			toolsets.NewServerTool(UpdatePullRequest(getClient, t)),
-			toolsets.NewServerTool(RequestCopilotReview(getClient, t)),
 
 			// Reviews
 			toolsets.NewServerTool(CreateAndSubmitPullRequestReview(getGQLClient, t)),
