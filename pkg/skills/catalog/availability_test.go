@@ -125,7 +125,8 @@ func TestCatalogAvailabilityModes(t *testing.T) {
 		{name: "exclude", exclude: []string{"get_me", "create_pull_request"}, absent: []string{"account-and-team-context", "pull-request-authoring"}},
 		{name: "optional absent", toolsets: []string{}, tools: []string{"create_pull_request"}, present: []string{"pull-request-authoring"}},
 		{name: "no scopes", noScopes: true, absent: []string{"issue-authoring", "repository-content-changes"}},
-		{name: "granular", features: []string{github.FeatureFlagIssuesGranular, github.FeatureFlagPullRequestsGranular}, present: []string{"issue-authoring", "issue-backlog-triage", "pull-request-code-review"}},
+		// "issues" is enabled explicitly: this fork does not include it in the default toolsets.
+		{name: "granular", toolsets: []string{"default", "issues"}, features: []string{github.FeatureFlagIssuesGranular, github.FeatureFlagPullRequestsGranular}, present: []string{"issue-authoring", "issue-backlog-triage", "pull-request-code-review"}},
 	} {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()

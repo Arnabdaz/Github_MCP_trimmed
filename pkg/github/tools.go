@@ -51,7 +51,6 @@ var (
 	ToolsetMetadataIssues = inventory.ToolsetMetadata{
 		ID:               "issues",
 		Description:      "GitHub Issues related tools",
-		Default:          true,
 		Icon:             "issue-opened",
 		InstructionsFunc: generateIssuesToolsetInstructions,
 	}
@@ -71,6 +70,7 @@ var (
 	ToolsetMetadataOrgs = inventory.ToolsetMetadata{
 		ID:          "orgs",
 		Description: "GitHub Organization related tools",
+		Default:     true,
 		Icon:        "organization",
 	}
 	ToolsetMetadataGovernance = inventory.ToolsetMetadata{
@@ -81,6 +81,7 @@ var (
 	ToolsetMetadataActions = inventory.ToolsetMetadata{
 		ID:          "actions",
 		Description: "GitHub Actions workflows and CI/CD operations",
+		Default:     true,
 		Icon:        "workflow",
 	}
 	ToolsetMetadataCodeQuality = inventory.ToolsetMetadata{
@@ -144,7 +145,6 @@ var (
 	ToolsetMetadataCopilot = inventory.ToolsetMetadata{
 		ID:          "copilot",
 		Description: "Copilot related tools",
-		Default:     true,
 		Icon:        "copilot",
 	}
 

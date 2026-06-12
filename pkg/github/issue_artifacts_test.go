@@ -84,7 +84,9 @@ func TestIssueArtifactTools(t *testing.T) {
 			if tc.enabled {
 				flags = append(flags, FeatureFlagIssueArtifacts)
 			}
+			// Enable "issues" explicitly: this fork does not include it in the default toolsets.
 			inv, err := inventory.NewBuilder().SetTools(AllTools(translations.NullTranslationHelper)).
+				WithToolsets([]string{"default", "issues"}).
 				WithReadOnly(tc.readOnly).WithFeatureChecker(featureCheckerFor(flags...)).Build()
 			require.NoError(t, err)
 			count := 0
